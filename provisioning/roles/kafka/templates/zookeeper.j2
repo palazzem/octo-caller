@@ -1,0 +1,10 @@
+[Unit]
+Description=Zookeeper
+After=network.target
+
+[Service]
+User=vagrant
+ExecStart={{kafka_home}}/bin/zookeeper-server-start.sh {{kafka_home}}/config/zookeeper.properties
+
+[Install]
+WantedBy=multi-user.target

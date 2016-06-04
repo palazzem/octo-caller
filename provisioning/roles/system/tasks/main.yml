@@ -1,0 +1,10 @@
+---
+
+# provision the node with common dependencies
+
+- name: installing prerequisites
+  yum: name={{item}} state=latest
+  become_user: root
+  with_items:
+      - tar
+      - java

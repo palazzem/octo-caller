@@ -1,0 +1,11 @@
+[Unit]
+Description=Kafka broker
+Requires=zookeeper.service
+After=network.target zookeeper.service
+
+[Service]
+User=vagrant
+ExecStart={{kafka_home}}/bin/kafka-server-start.sh {{kafka_home}}/config/server.properties
+
+[Install]
+WantedBy=multi-user.target

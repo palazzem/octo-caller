@@ -1,0 +1,25 @@
+---
+
+# preparing Kafka node
+
+- name: installing Kafka
+  unarchive: src={{kafka_url}} dest=/home/vagrant/ copy=no
+
+- name: copying services
+  become_user: root
+  template: src={{item.src}} dest=/etc/systemd/system/{{item.name}}
+  with_items:
+    - { src: 'kafka.j2', name: 'kafka.service' }
+    - { src: 'zookeeper.j2', name: 'zookeeper.service' }
+
+- name: activating Zookeeper and Kafka
+  service: name={{item}} enabled=yes
+  with_items:
+    - kafka
+    - zookeeper
+
+- name: starting Zookeeper
+  service: name=zookeeper state=started
+
+- name: starting Kafka
+  service: name=kafka state=started

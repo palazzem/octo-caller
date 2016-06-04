@@ -1,0 +1,11 @@
+---
+
+# preparing the node
+
+- hosts: default
+  become: yes
+  vars_files:
+    - variables.yml
+  roles:
+    - system
+    - kafka
