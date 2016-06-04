@@ -11,7 +11,6 @@ TOPIC_NAME = 'amazon'
 if __name__ == '__main__':
     consumer = KafkaConsumer(
         bootstrap_servers=BROKER_ADDRESS,
-        auto_offset_reset='earliest',
         value_deserializer=msgpack.unpackb,
     )
 
