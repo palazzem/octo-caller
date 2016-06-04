@@ -5,6 +5,9 @@
 - name: installing Kafka
   unarchive: src={{kafka_url}} dest=/home/vagrant/ copy=no
 
+- name: configuring Kafka for Vagrant
+  lineinfile: dest=/home/vagrant/kafka_2.11-0.10.0.0/config/server.properties line='advertised.listeners=PLAINTEXT://10.0.30.10:9092'
+
 - name: copying services
   become_user: root
   template: src={{item.src}} dest=/etc/systemd/system/{{item.name}}
